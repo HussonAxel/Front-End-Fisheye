@@ -1,76 +1,193 @@
 #contact_modal {
-    display: none;
+  display: none;
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(100, 100, 100, 0.5);
 }
 
 .photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+  background-color: #fafafa;
+  height: 300px;
+  margin: 0 100px;
 }
 
 .contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+  border-radius: 5px;
+  background-color: #db8876;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px;
+  margin: auto;
+  top: 5%;
+  position: relative;
 }
 
 .modal header {
-    justify-content: space-between;
-    width: 100%;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .modal header img {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+  font-size: 64px;
+  font-weight: normal;
+  text-align: center;
 }
 
 form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 form label {
-    color: #312E2E;
-    font-size: 36px;
+  color: #312e2e;
+  font-size: 36px;
 }
 
 form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+  margin-bottom: 26px;
 }
 
 form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
+  width: 100%;
+  height: 68px;
+  border: none;
+  border-radius: 5px;
+}
+
+.tri_label {
+  padding: 0 20px 0 100px;
+  font-weight: 600;
+}
+
+select {
+  color: white;
+  font-weight: 700;
+  border-radius: 5px;
+  background: var(--primary-color);
+  padding: 10px;
+}
+
+select option {
+  background-color: var(--primary-color);
+  padding: 15px;
+}
+
+.photographer_name {
+  font-size: 64px;
+  font-weight: 400;
+  color: var(--secondary-color);
+}
+
+.photographer_location {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--primary-color);
+}
+
+.photographer_tagline {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--dark-color);
+}
+
+.media_section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  align-items: center;
+  margin: 0 85px;
+  padding-top: 50px;
+}
+
+.media_wrapper {
+  max-width: 350px;
+  justify-self: center;
+}
+
+.media_image {
+  width: 350px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.media_data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.media_likes {
+  display: flex;
+  align-items: center;
+  text-align: end;
+  gap: 5px;
+  justify-content: flex-end;
+  width: 25%;
+}
+.media_title {
+  width: 75%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.media_title,
+.media_likes {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--primary-color);
+}
+
+
+.photograph_stats {
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  width: 375px;
+  height: 90px;
+  background-color: #db8876;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 5px;
+}
+
+
+.totalLikes, .photographerPrice {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+
+.totalLikes {
+  display: flex;
+  align-items: center;
+  text-align: end;
+  gap: 5px;
 }
