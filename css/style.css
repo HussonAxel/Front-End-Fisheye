@@ -39,7 +39,6 @@ h1 {
 }
 
 .photographer_section article {
-  justify-self: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,9 +95,3 @@ h1 {
   border-radius: 100%;
   object-fit: cover;
 }
-
-.total_like_icon {
-  color: black;
-}
-
-

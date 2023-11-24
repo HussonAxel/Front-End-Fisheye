@@ -13,7 +13,7 @@
   </head>
   <body>
     <header>
-      <a href="/Front-End-Fisheye/index.html"><img href="./index.html" src="assets/images/logo.png" class="logo" /></a>
+      <a href="/index.html"><img href="./index.html" src="assets/images/logo.png" class="logo" /></a>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -22,7 +22,7 @@
         </button>
       </div>
       <label for="tri" class="tri_label">Trier par</label>
-      <select id="tri" onchange="sortBy(value, photographerId, media)">
+      <select id="tri" onchange="sortBy(value)">
         <option value="Date">Date</option>
         <option value="Popularité">Popularité</option>
         <option value="Titre">Titre</option>
@@ -34,6 +34,13 @@
         <p class="photographerPrice"></p>
       </div>
     </main>
+    <div id="lightbox" class="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <img class="lightbox-content" id="lightboxImage">
+    <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+    <a class="next" onclick="changeImage(1)">&#10095;</a>
+</div>
+
     <div id="contact_modal" role="dialog" aria-labelledby="modal_title">
 			<div class="modal">
 				<header>
