@@ -1,60 +1,74 @@
+import fetchData from "./api.js";
+
 async function getDataAndCreateElements() {
-  const response = await fetch("./data/photographers.json");
-  const data = await response.json();
-  const photographers = data.photographers;
-  const media = data.media;
-
   const photographerSection = document.querySelector(".photographer_section");
+  const fragment = document.createDocumentFragment();
 
-  photographers.forEach((photographer) => {
-    const wrapper = document.createElement("article");
-    wrapper.classList.add("photographer_wrapper");
+  try {
+    const { photographers, media } = await fetchData();
 
-    const photographLink = document.createElement("a");
-    photographLink.href = "./photographer.html?id=" + photographer.id;
-    photographLink.classList.add("photographer_link");
+    photographers.forEach(
+      ({ id, name, city, country, portrait, tagline, price }) => {
+        const wrapper = createElement("article", "photographer_wrapper");
+        const photographLink = createElement("a", "photographer_link", {
+          href: `./photographer.html?id=${id}`,
+        });
+        const photographImage = createElement("img", "photographer_image", {
+          src: `./assets/Sample Photos/Photographers ID Photos/${portrait}`,
+          alt: name,
+        });
+        const photographName = createElement(
+          "h2",
+          "photographer_name",
+          {},
+          name
+        );
+        const photographLocation = createElement(
+          "p",
+          "photographer_location",
+          {},
+          `${city}, ${country}`
+        );
+        const photographTagline = createElement(
+          "p",
+          "photographer_tagline",
+          {},
+          tagline
+        );
+        const photographPrice = createElement(
+          "p",
+          "photographer_price",
+          {},
+          `${price}€/jour`
+        );
 
-    const photographImage = document.createElement("img");
-    photographImage.classList.add("photographer_image");
-    photographImage.src =
-      "./assets/Sample Photos/Photographers ID Photos/" + photographer.portrait;
-    photographImage.alt = photographer.name;
-
-    const photographName = document.createElement("h2");
-    photographName.classList.add("photographer_name");
-    photographName.textContent = photographer.name;
-
-    // Add the image and name to the link
-    photographLink.appendChild(photographImage);
-    photographLink.appendChild(photographName);
-
-    const photographLocation = document.createElement("p");
-    photographLocation.classList.add("photographer_location");
-    photographLocation.textContent =
-      photographer.city + ", " + photographer.country;
-    photographLocation.setAttribute(
-      "aria-label",
-      photographer.city + ", " + photographer.country
+        photographLink.append(photographImage, photographName);
+        wrapper.append(
+          photographLink,
+          photographLocation,
+          photographTagline,
+          photographPrice
+        );
+        fragment.appendChild(wrapper);
+      }
     );
 
-    const photographTagline = document.createElement("p");
-    photographTagline.classList.add("photographer_tagline");
-    photographTagline.textContent = photographer.tagline;
+    photographerSection.appendChild(fragment);
+    return { photographers, media };
+  } catch (error) {
+    console.error("Error in getDataAndCreateElements:", error);
+    return null;
+  }
+}
 
-    const photographPrice = document.createElement("p");
-    photographPrice.classList.add("photographer_price");
-    photographPrice.textContent = photographer.price + "€/jour";
-
-    // Add the link to the wrapper
-    wrapper.appendChild(photographLink);
-    wrapper.appendChild(photographLocation);
-    wrapper.appendChild(photographTagline);
-    wrapper.appendChild(photographPrice);
-
-    photographerSection.appendChild(wrapper);
-  });
-
-  return { photographers, media };
+function createElement(type, className, attributes = {}, textContent = "") {
+  const element = document.createElement(type);
+  element.className = className;
+  Object.entries(attributes).forEach(([key, value]) =>
+    element.setAttribute(key, value)
+  );
+  if (textContent) element.textContent = textContent;
+  return element;
 }
 
 getDataAndCreateElements();
