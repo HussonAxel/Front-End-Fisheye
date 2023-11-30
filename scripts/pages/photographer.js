@@ -117,7 +117,7 @@ function createVideoElement(mediaItem, firstName) {
   video.className = "media_image";
   video.src = `./assets/Sample Photos/${firstName}/${mediaItem.video}`;
   video.title = mediaItem.title;
-  video.controls = true;
+  video.controls = false;
   video.onclick = function () {
     openLightbox(mediaItem.video);
   };
