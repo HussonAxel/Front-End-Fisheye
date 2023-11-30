@@ -8,7 +8,6 @@ async function fetchData() {
     const photographers = data.photographers;
     const media = data.media;
 
-    // Return data as an object
     return { data, photographers, media };
   } catch (error) {
     console.error("Error fetching data:", error);
