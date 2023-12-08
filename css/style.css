@@ -26,7 +26,8 @@ header {
     align-items: center;
     height: 150px;
 
-    .logo, h1 { 
+    .logo,
+    h1 {
       margin: 0;
     }
   }
@@ -34,7 +35,6 @@ header {
 
 h1 {
   color: var(--primary-color);
-  margin-right: 100px;
 }
 
 .logo {
@@ -51,7 +51,7 @@ h1 {
   @media (max-width: 1062px) {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   @media (max-width: 720px) {
     grid-template-columns: 1fr;
   }
@@ -96,21 +96,4 @@ h1 {
 
 .photographer_price {
   color: #757575;
-}
-
-.photograph-header {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 100px;
-  margin-bottom: 50px;
-  gap: 150px;
-}
-
-.photographer_image {
-  height: 200px;
-  width: 200px;
-  border-radius: 100%;
-  object-fit: cover;
 }
