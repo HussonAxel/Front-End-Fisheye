@@ -238,7 +238,6 @@ export function openLightbox(media, photographer) {
     if (direction === "left") {
       newIndex = (currentMediaIndex - 1 + mediaCount) % mediaCount;
     } else {
-      // "right"
       newIndex = (currentMediaIndex + 1) % mediaCount;
     }
 
@@ -265,8 +264,18 @@ export function openLightbox(media, photographer) {
   leftArrow.addEventListener("click", function () {
     navigateLightbox("left");
   });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowLeft") {
+      navigateLightbox("left");
+    }
+  });
 
   rightArrow.addEventListener("click", function () {
     navigateLightbox("right");
+  });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowRight") {
+      navigateLightbox("right");
+    }
   });
 }
