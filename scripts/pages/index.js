@@ -1,3 +1,4 @@
+import { createElement, createPhotographerElement } from "../utils/indexFunctionFactory.js";
 import fetchData from "./api.js";
 
 async function getDataAndCreateElements() {
@@ -7,51 +8,10 @@ async function getDataAndCreateElements() {
   try {
     const { photographers, media } = await fetchData();
 
-    photographers.forEach(
-      ({ id, name, city, country, portrait, tagline, price }) => {
-        const wrapper = createElement("article", "photographer_wrapper");
-        const photographLink = createElement("a", "photographer_link", {
-          href: `./photographer.html?id=${id}`,
-        });
-        const photographImage = createElement("img", "photographer_image", {
-          src: `./assets/Sample Photos/Photographers ID Photos/${portrait}`,
-          alt: name,
-        });
-        const photographName = createElement(
-          "h2",
-          "photographer_name",
-          {},
-          name
-        );
-        const photographLocation = createElement(
-          "p",
-          "photographer_location",
-          {},
-          `${city}, ${country}`
-        );
-        const photographTagline = createElement(
-          "p",
-          "photographer_tagline",
-          {},
-          tagline
-        );
-        const photographPrice = createElement(
-          "p",
-          "photographer_price",
-          {},
-          `${price}€/jour`
-        );
-
-        photographLink.append(photographImage, photographName);
-        wrapper.append(
-          photographLink,
-          photographLocation,
-          photographTagline,
-          photographPrice
-        );
-        fragment.appendChild(wrapper);
-      }
-    );
+    photographers.forEach((photographerData) => {
+      const photographerElement = createPhotographerElement(photographerData);
+      fragment.appendChild(photographerElement);
+    });
 
     photographerSection.appendChild(fragment);
     return { photographers, media };
@@ -59,16 +19,6 @@ async function getDataAndCreateElements() {
     console.error("Error in getDataAndCreateElements:", error);
     return null;
   }
-}
-
-function createElement(type, className, attributes = {}, textContent = "") {
-  const element = document.createElement(type);
-  element.className = className;
-  Object.entries(attributes).forEach(([key, value]) =>
-    element.setAttribute(key, value)
-  );
-  if (textContent) element.textContent = textContent;
-  return element;
 }
 
 getDataAndCreateElements();
