@@ -13,7 +13,9 @@
   </head>
   <body>
     <header>
-      <a href="/Front-End-Fisheye/"><img src="assets/images/logo.png" class="logo" /></a>
+      <a href="/Front-End-Fisheye/"
+        ><img src="assets/images/logo.png" class="logo"
+      /></a>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -21,51 +23,116 @@
           Contactez-moi
         </button>
       </div>
-      <label for="tri" class="tri_label">Trier par</label>
-      <select id="tri" onchange="sortBy(value)">
-        <option value="Date">Date</option>
-        <option value="Popularité">Popularité</option>
-        <option value="Titre">Titre</option>
-      </select>
-      <div class="media_section">
+      <div class="filterWrapper">
+        <label for="tri" class="tri_label">Trier par</label>
+        <select id="tri">
+          <option value="Date">Date</option>
+          <option value="Popularité">Popularité</option>
+          <option value="Titre">Titre</option>
+        </select>
       </div>
+      <div class="media_section"></div>
       <div class="photograph_stats">
-        <p class="totalLikes"></p>
         <p class="photographerPrice"></p>
       </div>
     </main>
-    <div id="lightbox" class="lightbox">
-    <span class="close" onclick="closeLightbox()">&times;</span>
-    <img class="lightbox-content" id="lightboxImage">
-    <a class="prev" onclick="changeImage(-1)">&#10094;</a>
-    <a class="next" onclick="changeImage(1)">&#10095;</a>
-</div>
+    <div id="lightbox">
+      <button id="close-lightbox" tabindex="0" aria-label="Bouton pour fermer la boîte de dialogue">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M.41 1.41L1.41.41 8 7l6.59-6.59 1-1 1 1-1 1-6.59 6.59 6.59 6.59 1 1-1 1-1-1-6.59-6.59-6.59 6.59-1 1-1-1 1-1 6.59-6.59L.41 2.41z"
+          />
+        </svg>
+      </button>
+
+      <button id="left-arrow" aria-label="Bouton pour naviguer vers la gauche">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 11-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"
+          />
+        </svg>
+      </button>
+
+      <button id="right-arrow" aria-label="Bouton pour naviguer vers la droite">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 11-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
+          />
+        </svg>
+      </button>
+
+      <div id="lightbox-media-container">
+        <img id="lightbox-img" src="" alt="lightbox image" />
+        <video id="lightbox-video" controls style="display: none;"></video>
+        <p id="lightbox-media-name"></p>
+      </div>
+    </div>
 
     <div id="contact_modal" role="dialog" aria-labelledby="modal_title">
-			<div class="modal">
-				<header>
+      <div class="modal">
+        <header>
           <h2 id="modal_title">Contactez-moi</h2>
-          <button id='modal-close-btn' type="button" aria-label="fermer la fenêtre de contact" onclick="closeModal()"><img src="assets/icons/close.svg" alt=""  /></button> 
+          <button
+            id="modal-close-btn"
+            type="button"
+            aria-label="fermer la fenêtre de contact"
+            onclick="closeModal()"
+            tabindex="0"
+          >
+            <img src="assets/icons/close.svg" alt="" />
+          </button>
         </header>
-				<form>
-					<div>
-						<label for="firstName">Prénom</label>
-						<input id="firstName" name="prenom" type="text"/>
+        <form>
+          <div>
+            <label for="firstName">Prénom</label>
+            <input id="firstName" name="prenom" type="text" />
+            <span id="error-message-firstName" class="error-message"></span>
 
             <label for="lastName">Nom</label>
             <input id="lastName" name="nom" type="text" />
+            <span id="error-message-lastName" class="error-message"></span>
 
             <label for="email">Email</label>
             <input id="email" name="email" type="email" />
+            <span id="error-message-email" class="error-message"></span>
 
             <label for="message">Votre Message</label>
             <textarea id="message" name="message"></textarea>
-					</div>
-          <button aria-label="Envoyer la demande" type="button" id='modal-send-formData' class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="./scripts/pages/photographer.js"></script>
+            <span id="error-message-message" class="error-message"></span>
+          </div>
+          <button
+            aria-label="Envoyer la demande"
+            type="button"
+            id="modal-send-formData"
+            class="contact_button"
+          >
+            Envoyer
+          </button>
+        </form>
+      </div>
+    </div>
+
     <script src="./scripts/utils/contactForm.js"></script>
+    <script type="module" src="./scripts/pages/photographer.js"></script>
   </body>
 </html>
