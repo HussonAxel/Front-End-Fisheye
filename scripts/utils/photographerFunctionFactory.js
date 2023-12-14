@@ -85,6 +85,8 @@ export function createMediaElement(mediaItem, photographer) {
   );
   const mediaLikesIcon = createElement("img", "likes", {
     src: "./assets/images/red_like.png",
+    tabindex: "0",
+    "aria-label": `${mediaItem.likes} likes`,
   });
   mediaLikesWrapper.appendChild(mediaLikes);
   mediaLikesWrapper.appendChild(mediaLikesIcon);
@@ -163,20 +165,33 @@ export function updateLikes(element, increment) {
 export function likeMedia() {
   document.addEventListener("click", function (event) {
     if (event.target.classList.contains("likes")) {
-      const closestElement = event.target.closest(".media_likes_wrapper");
-      const totalLikesWrapper = document.querySelector(".total_likes");
-
-      if (closestElement) {
-        const mediaLikes = closestElement.querySelector(".media_likes");
-        const increment = closestElement.classList.contains("liked") ? -1 : 1;
-
-        updateLikes(mediaLikes, increment);
-        updateLikes(totalLikesWrapper, increment);
-
-        closestElement.classList.toggle("liked");
-      }
+      handleLike(event);
     }
   });
+
+  document.addEventListener("keydown", function (event) {
+    if (
+      event.key === "Enter" &&
+      document.activeElement.classList.contains("likes")
+    ) {
+      handleLike(event);
+    }
+  });
+}
+
+function handleLike(event) {
+  const closestElement = event.target.closest(".media_likes_wrapper");
+  const totalLikesWrapper = document.querySelector(".total_likes");
+
+  if (closestElement) {
+    const mediaLikes = closestElement.querySelector(".media_likes");
+    const increment = closestElement.classList.contains("liked") ? -1 : 1;
+
+    updateLikes(mediaLikes, increment);
+    updateLikes(totalLikesWrapper, increment);
+
+    closestElement.classList.toggle("liked");
+  }
 }
 
 export function openLightbox(media, photographer) {
@@ -191,28 +206,87 @@ export function openLightbox(media, photographer) {
   lightboxImg.style.display = "none";
   lightboxVideo.style.display = "none";
 
+  function handleMediaOpen(mediaElement) {
+    lightboxImg.style.display = "none";
+    lightboxVideo.style.display = "none";
+
+    const lightboxMediaName = document.getElementById("lightbox-media-name");
+    if (mediaElement.tagName === "IMG") {
+      lightboxImg.src = mediaElement.src;
+      lightboxImg.alt = mediaElement.alt;
+      lightboxImg.style.display = "block";
+      lightboxMediaName.textContent = mediaElement.alt;
+    } else if (mediaElement.tagName === "VIDEO") {
+      lightboxVideo.src = mediaElement.src;
+      lightboxVideo.style.display = "block";
+      lightboxMediaName.textContent = mediaElement.title;
+    }
+    lightbox.style.display = "flex";
+    closeLightboxButton.focus();
+  }
+
   document.addEventListener("click", function (event) {
     if (event.target.classList.contains("media_image")) {
-      lightboxImg.style.display = "none";
-      lightboxVideo.style.display = "none";
-
-      const lightboxMediaName = document.getElementById("lightbox-media-name");
-      if (event.target.tagName === "IMG") {
-        lightboxImg.src = event.target.src;
-        lightboxImg.alt = event.target.alt;
-        lightboxImg.style.display = "block";
-        lightboxMediaName.textContent = event.target.alt;
-      } else if (event.target.tagName === "VIDEO") {
-        lightboxVideo.src = event.target.src;
-        lightboxVideo.style.display = "block";
-        lightboxMediaName.textContent = event.target.title;
-      }
-      lightbox.style.display = "flex";
-      if (lightbox.style.display === "flex") {
-        closeLightboxButton.focus();
-      }
+      handleMediaOpen(event.target);
     }
   });
+
+  document.addEventListener("keydown", function (event) {
+    console.log("Keydown event triggered");
+    if (
+      event.key === "Enter" &&
+      document.activeElement.classList.contains("media_image")
+    ) {
+      // change the display of the lightbox from none to flex 
+
+      handleMediaOpen(document.activeElement);
+    }
+  });
+  // document.addEventListener("click", function (event) {
+  //     if (event.target.classList.contains("media_image")) {
+  //         lightboxImg.style.display = "none";
+  //         lightboxVideo.style.display = "none";
+
+  //         const lightboxMediaName = document.getElementById("lightbox-media-name");
+  //         if (event.target.tagName === "IMG") {
+  //           lightboxImg.src = event.target.src;
+  //           lightboxImg.alt = event.target.alt;
+  //           lightboxImg.style.display = "block";
+  //           lightboxMediaName.textContent = event.target.alt;
+  //         } else if (event.target.tagName === "VIDEO") {
+  //           lightboxVideo.src = event.target.src;
+  //           lightboxVideo.style.display = "block";
+  //           lightboxMediaName.textContent = event.target.title;
+  //         }
+  //         lightbox.style.display = "flex";
+  //         if (lightbox.style.display === "flex") {
+  //           closeLightboxButton.focus();
+  //         }
+  //       }
+  //   });
+
+  // document.addEventListener("keydown", function (event) {
+  //   if (event.key === "Enter" && document.activeElement.classList.contains("media_image")) {
+  //     // lightboxImg.style.display = "none";
+  //     // lightboxVideo.style.display = "none";
+
+  //     // const lightboxMediaName = document.getElementById("lightbox-media-name");
+  //     // const activeElement = document.activeElement;
+  //     // if (activeElement.tagName === "IMG") {
+  //     //   lightboxImg.src = activeElement.src;
+  //     //   lightboxImg.alt = activeElement.alt;
+  //     //   lightboxImg.style.display = "block";
+  //     //   lightboxMediaName.textContent = activeElement.alt;
+  //     // } else if (activeElement.tagName === "VIDEO") {
+  //     //   lightboxVideo.src = activeElement.src;
+  //     //   lightboxVideo.style.display = "block";
+  //     //   lightboxMediaName.textContent = activeElement.title;
+  //     // }
+  //     // lightbox.style.display = "flex";
+  //     // closeLightboxButton.focus();
+  //     console.log("test");
+  //   }
+  // });
 
   closeLightboxButton.addEventListener("click", function () {
     lightbox.style.display = "none";

@@ -36,8 +36,57 @@
         <p class="photographerPrice"></p>
       </div>
     </main>
+
     <div id="lightbox">
-      <button id="close-lightbox" tabindex="0" aria-label="Bouton pour fermer la boîte de dialogue">
+      <div id="lightbox-media-container">
+        <button
+          id="left-arrow"
+          aria-label="Bouton pour naviguer vers la gauche"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 11-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"
+            />
+          </svg>
+        </button>
+
+        <div id="lightbox-media-content">
+          <img id="lightbox-img" src="" alt="lightbox image" />
+          <video id="lightbox-video" controls style="display: none"></video>
+          <p id="lightbox-media-name"></p>
+        </div>
+
+        <button
+          id="right-arrow"
+          aria-label="Bouton pour naviguer vers la droite"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 11-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <button
+        id="close-lightbox"
+        tabindex="0"
+        aria-label="Bouton pour fermer la boîte de dialogue"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -50,42 +99,6 @@
           />
         </svg>
       </button>
-
-      <button id="left-arrow" aria-label="Bouton pour naviguer vers la gauche">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="currentColor"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 11-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"
-          />
-        </svg>
-      </button>
-
-      <button id="right-arrow" aria-label="Bouton pour naviguer vers la droite">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="currentColor"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 11-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
-          />
-        </svg>
-      </button>
-
-      <div id="lightbox-media-container">
-        <img id="lightbox-img" src="" alt="lightbox image" />
-        <video id="lightbox-video" controls style="display: none;"></video>
-        <p id="lightbox-media-name"></p>
-      </div>
     </div>
 
     <div id="contact_modal" role="dialog" aria-labelledby="modal_title">
